@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Multi View</title>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <a class="navbar-brand mr-1" href="index.html">Multi View</a>
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+    </button>
+</nav>
+
+<div id="wrapper">
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <div class="card-group text-center" style="font-size: 0.8rem">
+                <div class="card mb-2 border-0">
+                    <div class="card-group border-0">
+                        <div class="card mr-1 card-border-6 border-0">
+                            <div class="card-header pt-2 border border-bottom-0" style="height: 50%;">
+                                <i class="fas fa-project-diagram"><b> Project Name</b></i>
+                            </div>
+                            <div class="card pt-1 " style="height: 50%;">
+                                <p id="project_name" class="mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="card mr-1 card-border-6 border-0">
+                            <div class="card-header pt-2 border border-bottom-0" style="height: 50%;">
+                                <i class="fas fa-user"><b> Subject Name</b></i>
+                            </div>
+                            <div class="card pt-1" style="height: 50%;">
+                                <p id="subject_name" class="mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="card mr-1 card-border-6 border-0">
+                            <div class="card-header pt-2 border border-bottom-0" style="height: 50%;">
+                                <i class="fas fa-calendar"><b> Scan Date</b></i>
+                            </div>
+                            <div class="card pt-1" style="height: 50%;">
+                                <p id="scan_date" class="mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="card mr-1 card-border-6 border-0">
+                            <div class="card-header pt-2 border border-bottom-0" style="height: 50%;">
+                                <i class="fas fa-calendar-check"><b> Time Point</b></i>
+                            </div>
+                            <div class="card pt-1" style="height: 50%;">
+                                <p id="time_point" class="mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="card mr-1 card-border-6 border-0">
+                            <div class="card-header pt-2 border border-bottom-0" style="height: 50%;">
+                                <i class="fas fa-eye"><b> Visit</b></i>
+                            </div>
+                            <div class="card pt-1" style="height: 50%;">
+                                <p id="visit" class="mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="card mr-1 card-border-6 border-0">
+                            <div class="card-header pt-2 border border-bottom-0" style="height: 50%;">
+                                <i class="fas fa-clipboard-list"><b> Week</b></i>
+                            </div>
+                            <div class="card pt-1" style="height: 50%;">
+                                <p id="week" class="mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="card mr-1 card-border-6 border-0">
+                            <div class="card-header pt-2 border border-bottom-0" style="height: 50%;">
+                                <i class="fas fa-calendar-day"><b> Confirmatory Scan</b></i>
+                            </div>
+                            <div class="card pt-1" style="height: 50%;">
+                                <p id="confirmatory_scan" class="mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="card mr-1 card-border-6 border-0">
+                            <div class="card-header pt-2 border border-bottom-0" style="height: 50%;">
+                                <i class="fas fa-calendar-times"><b> Response Date</b></i>
+                            </div>
+                            <div class="card pt-1" style="height: 50%;">
+                                <p id="response_date" class="mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="card mr-1 card-border-6 border-0">
+                            <div class="card-header pt-2 border border-bottom-0" style="height: 50%;">
+                                <i class="fas fa-calendar-times"><b> iResponse Date</b></i>
+                            </div>
+                            <div class="card pt-1" style="height: 50%;">
+                                <p id="iresponse_date" class="mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="card mr-1 card-border-6 border-0">
+                            <div class="card-header pt-2 border border-bottom-0" style="height: 50%;">
+                                <i class="fas fa-user-check"><b> Completed By</b></i>
+                            </div>
+                            <div class="card pt-1" style="height: 50%;">
+                                <p id="completed_name" class="mb-0"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="d-flex flex-row flex-nowrap"  name="tp-list" style="font-size: 0.8rem">
+                <div class="card-group mr-2 mt-3" style="width: 13rem">
+                    <div class="card d-block border-0">
+                        <div class = "card-body border-0 text-info text-right"> <a class="btn btn-sm" href="#"> <b>TIMELINE</b> </a></div>
+                        <div class = "card-body border-0 text-right"><b class="zero"> #Time </b> </div>
+                        <div class = "card card-border zero" name="item-list_target"> </div>
+                        <div class = "card card-border mt-2 zero" name="item-list_nontarget"> </div>
+                        <div class = "card card-border mt-2 zero" name="item-list_newlesion"> </div>
+                        <div class = "card card-border mt-2 zero" name="item-list_overall"> </div>
+                    </div>
+                </div>
+                <div class="card-group mr-2 mt-3" style="width: 13rem">
+                    <div class="card d-block border-0">
+                        <div class = "card-body border-0 text-info text-center" name="bl_tp"></div>
+                        <div class = "card-body border-0 text-center" name="bl_date"></div>
+                        <div class = "card card-border zero" name="base-list_target"> </div>
+                        <div class = "card card-border mt-2 zero" name="base-list_nontarget"> </div>
+                        <div class = "card card-border mt-2 zero" name="base-list_newlesion"> </div>
+                        <div class = "card card-border mt-2 zero" name="base-list_overall"> </div>
+                    </div>
+                </div>
+
+
+                <div class="d-flex flex-row flex-nowrap scrollbar mt-0 pt-0 dragscroll" name="tp-group" id="style-11" style="font-size: 0.8rem; overflow-x: auto;">
+                    <div class="card d-block border-0 rotates">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+</body>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/datatables/jquery.dataTables.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/asvd/dragscroll/master/dragscroll.js"></script>
+<script src="js/sb-admin.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+    let tp_Data = [{"id": 0, "time_point": "BL", "scan_date": "2019-08-09"},
+        {"id": 1, "time_point": "TP1", "scan_date": "2019-08-25"},
+        {"id": 2, "time_point": "TP2", "scan_date": "2019-09-14"},
+        {"id": 3, "time_point": "TP3", "scan_date": "2019-09-26"},
+        {"id": 4, "time_point": "TP4", "scan_date": "2019-08-25"},
+        {"id": 5, "time_point": "TP5", "scan_date": "2019-09-14"},
+        {"id": 6, "time_point": "TP6", "scan_date": "2019-09-26"},
+        {"id": 7, "time_point": "TP7", "scan_date": "2019-08-25"},
+        {"id": 8, "time_point": "TP8", "scan_date": "2019-09-14"},
+        {"id": 9, "time_point": "TP9", "scan_date": "2019-09-26"},
+        {"id": 10, "time_point": "TP10", "scan_date": "2019-08-25"},
+        {"id": 11, "time_point": "TP11", "scan_date": "2019-09-14"},
+        {"id": 12, "time_point": "TP12", "scan_date": "2019-09-26"},
+    ];
+
+    let target_Data = [{"id": "BL", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "55", "sumofmeasurement": "165.94", "response" : "BL", "iresponse" :"BL"},
+        {"id": "BL", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "55.4", "sumofmeasurement": "165.94", "response" : "BL", "iresponse" :"BL"},
+        {"id": "BL", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "55.54", "sumofmeasurement": "165.94", "response" : "BL", "iresponse" :"BL"},
+        {"id": "TP1", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "54", "sumofmeasurement": "158.5", "response" : "SD", "iresponse" :"iSD"},
+        {"id": "TP1", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "53.1", "sumofmeasurement": "158.5", "response" : "SD", "iresponse" :"iSD"},
+        {"id": "TP1", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "51.4", "sumofmeasurement": "158.5", "response" : "SD", "iresponse" :"iSD"},
+        {"id": "TP2", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "64.2", "sumofmeasurement": "195.94", "response" : "PD", "iresponse" :"iUPD"},
+        {"id": "TP2", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "63.2", "sumofmeasurement": "195.94", "response" : "PD", "iresponse" :"iUPD"},
+        {"id": "TP2", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "68.54", "sumofmeasurement": "195.94", "response" : "PD", "iresponse" :"iUPD"},
+        {"id": "TP3", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "45.2", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP3", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "41.02", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP3", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "42", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP4", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "45.2", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP4", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "41.02", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP4", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "42", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP5", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "45.2", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP5", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "41.02", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP5", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "42", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP6", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "45.2", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP6", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "41.02", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP6", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "42", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP7", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "45.2", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP7", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "41.02", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP7", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "42", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP8", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "45.2", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP8", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "41.02", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP8", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "42", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP9", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "45.2", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP9", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "41.02", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP9", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "42", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP10", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "45.2", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP10", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "41.02", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP10", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "42", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP11", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "45.2", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP11", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "41.02", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP11", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "42", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP12", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "measurement": "45.2", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP12", "organ": "Lung", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "measurement": "41.02", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},
+        {"id": "TP12", "organ": "Liver", "site": "LUL2", "series": "5", "image": "54", "method": "CT", "method_other": "", "measurement": "42", "sumofmeasurement": "128.22", "response" : "PR", "iresponse" :"iCPD"},];
+
+    let ntarget_Data = [{"id": "BL", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present at BL", "response" : "BL", "iresponse" :"BL"},
+        {"id": "BL", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present at BL", "response" : "BL", "iresponse" :"BL"},
+        {"id": "TP1", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Absent on FU", "response" : "Non-CR/Non-PR", "iresponse" :"Non-iCR/Non-iPR"},
+        {"id": "TP1", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Absent on FU", "response" : "Non-CR/Non-PR", "iresponse" :"Non-iCR/Non-iPR"},
+        {"id": "TP2", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Increased on FU", "response" : "PD", "iresponse" :"iUPD"},
+        {"id": "TP2", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Increased on FU", "response" : "PD", "iresponse" :"iUPD"},
+        {"id": "TP3", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP3", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP4", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP4", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP5", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP5", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP6", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP6", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP7", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP7", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP8", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP8", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP9", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP9", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP10", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP10", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP11", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP11", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP12", "organ": "Lung", "site": "LUL", "series": "3", "image": "55", "method": "CT", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},
+        {"id": "TP12", "organ": "Liver", "site": "LUL1", "series": "4", "image": "53", "method": "MR", "method_other": "", "status": "Present on FU", "response" : "NE", "iresponse" :"NE"},];
+
+    let new_Data = [{"id": "BL", "organ": "", "site": "", "series": "", "image": "", "method": "", "method_other": "", "type": "", "assessment": "", "previously" : "", "sumofmeasurement": "", "isom": ""},
+        {"id": "BL", "organ": "", "site": "", "series": "", "image": "", "method": "", "method_other": "", "type": "", "assessment": "", "previously" : "", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP1", "organ": "", "site": "", "series": "", "image": "", "method": "", "method_other": "", "type": "", "assessment": "", "previously" : "", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP1", "organ": "", "site": "", "series": "", "image": "", "method": "", "method_other": "", "type": "", "assessment": "", "previously" : "", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP2", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Initially detected", "previously" : "No", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP2", "organ": "", "site": "", "series": "", "image": "", "method": "", "method_other": "", "type": "", "assessment": "", "previously" : "", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP3", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Present on FU", "previously" : "Yes", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP3", "organ": "Liver", "site": "LUL4", "series": "6", "image": "24", "method": "CT", "method_other": "", "type": "target", "assessment": "55", "previously" : "No", "sumofmeasurement": "55", "isom": ""},
+        {"id": "TP4", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Present on FU", "previously" : "Yes", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP4", "organ": "Liver", "site": "LUL4", "series": "6", "image": "24", "method": "CT", "method_other": "", "type": "target", "assessment": "50", "previously" : "No", "sumofmeasurement": "50", "isom": ""},
+        {"id": "TP5", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Present on FU", "previously" : "Yes", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP5", "organ": "Liver", "site": "LUL4", "series": "6", "image": "24", "method": "CT", "method_other": "", "type": "target", "assessment": "48", "previously" : "No", "sumofmeasurement": "48", "isom": ""},
+        {"id": "TP6", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Present on FU", "previously" : "Yes", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP6", "organ": "Liver", "site": "LUL4", "series": "6", "image": "24", "method": "CT", "method_other": "", "type": "target", "assessment": "49", "previously" : "No", "sumofmeasurement": "49", "isom": ""},
+        {"id": "TP7", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Present on FU", "previously" : "Yes", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP7", "organ": "Liver", "site": "LUL4", "series": "6", "image": "24", "method": "CT", "method_other": "", "type": "target", "assessment": "52", "previously" : "No", "sumofmeasurement": "52", "isom": ""},
+        {"id": "TP8", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Present on FU", "previously" : "Yes", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP8", "organ": "Liver", "site": "LUL4", "series": "6", "image": "24", "method": "CT", "method_other": "", "type": "target", "assessment": "53", "previously" : "No", "sumofmeasurement": "53", "isom": ""},
+        {"id": "TP9", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Present on FU", "previously" : "Yes", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP9", "organ": "Liver", "site": "LUL4", "series": "6", "image": "24", "method": "CT", "method_other": "", "type": "target", "assessment": "51", "previously" : "No", "sumofmeasurement": "51", "isom": ""},
+        {"id": "TP10", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Present on FU", "previously" : "Yes", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP10", "organ": "Liver", "site": "LUL4", "series": "6", "image": "24", "method": "CT", "method_other": "", "type": "target", "assessment": "50", "previously" : "No", "sumofmeasurement": "50", "isom": ""},
+        {"id": "TP11", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Present on FU", "previously" : "Yes", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP11", "organ": "Liver", "site": "LUL4", "series": "6", "image": "24", "method": "CT", "method_other": "", "type": "target", "assessment": "55", "previously" : "No", "sumofmeasurement": "55", "isom": ""},
+        {"id": "TP12", "organ": "Liver", "site": "LUL", "series": "4", "image": "53", "method": "CT", "method_other": "", "type": "nontarget", "assessment": "Present on FU", "previously" : "Yes", "sumofmeasurement": "", "isom": ""},
+        {"id": "TP12", "organ": "Liver", "site": "LUL4", "series": "6", "image": "24", "method": "CT", "method_other": "", "type": "target", "assessment": "55", "previously" : "No", "sumofmeasurement": "55", "isom": ""},];
+
+    let overall_Data = [{"id": "BL", "response": "BL", "iresponse": "BL", "response_date": "2019-08-09", "iresponse_date": "2019-08-09", "completed_name": "KKW", "completed_day": "2019-08-18"},
+        {"id": "TP1", "response": "SD", "iresponse": "iSD", "response_date": "2019-08-25", "iresponse_date": "2019-08-25", "completed_name": "SYB", "completed_day": "2019-09-02"},
+        {"id": "TP2", "response": "PD", "iresponse": "iUPD", "response_date": "2019-09-14", "iresponse_date": "2019-09-14", "completed_name": "KYS", "completed_day": "2019-09-20"},
+        {"id": "TP3", "response": "CR", "iresponse": "iCR", "response_date": "2019-09-26", "iresponse_date": "2019-09-26", "completed_name": "LJW", "completed_day": "2019-09-30"},
+        {"id": "TP4", "response": "PR", "iresponse": "iPR", "response_date": "2019-09-26", "iresponse_date": "2019-09-26", "completed_name": "LJW", "completed_day": "2019-09-30"},
+        {"id": "TP5", "response": "NE", "iresponse": "NE", "response_date": "2019-09-26", "iresponse_date": "2019-09-26", "completed_name": "LJW", "completed_day": "2019-09-30"},
+        {"id": "TP6", "response": "NE", "iresponse": "NE", "response_date": "2019-09-26", "iresponse_date": "2019-09-26", "completed_name": "LJW", "completed_day": "2019-09-30"},
+        {"id": "TP7", "response": "NE", "iresponse": "NE", "response_date": "2019-09-26", "iresponse_date": "2019-09-26", "completed_name": "LJW", "completed_day": "2019-09-30"},
+        {"id": "TP8", "response": "NE", "iresponse": "NE", "response_date": "2019-09-26", "iresponse_date": "2019-09-26", "completed_name": "LJW", "completed_day": "2019-09-30"},
+        {"id": "TP9", "response": "NE", "iresponse": "NE", "response_date": "2019-09-26", "iresponse_date": "2019-09-26", "completed_name": "LJW", "completed_day": "2019-09-30"},
+        {"id": "TP10", "response": "NE", "iresponse": "NE", "response_date": "2019-09-26", "iresponse_date": "2019-09-26", "completed_name": "LJW", "completed_day": "2019-09-30"},
+        {"id": "TP11", "response": "NE", "iresponse": "NE", "response_date": "2019-09-26", "iresponse_date": "2019-09-26", "completed_name": "LJW", "completed_day": "2019-09-30"},
+        {"id": "TP12", "response": "NE", "iresponse": "NE", "response_date": "2019-09-26", "iresponse_date": "2019-09-26", "completed_name": "LJW", "completed_day": "2019-09-30"},
+    ];
+
+    let bl = target_Data.map((v) => {if (v.id == "BL") {return v;}});
+    bl = $.grep(bl, function (n) {return n == "undefined" || n;});
+    let tp = target_Data.map((v) => {if (v.id != "BL") {return v;}});
+    tp = $.grep(tp, function (n) {return n == "undefined" || n;});
+    let nbl = ntarget_Data.map((v) => {if (v.id == "BL") {return v;}});
+    nbl = $.grep(nbl, function (n) {return n == "undefined" || n;});
+    let newbl = new_Data.map((v) => {if (v.organ != "") {return v;}});
+    newbl = $.grep(newbl, function (n) {return n == "undefined" || n;});
+
+    let compVal = 0; let cnt = 1; let overlap = {}; let overlapArr = []; let isBreak = false; let compVal2 = []; let SumOfMeasurement = [];
+    for(let i=0; i<newbl.length-1; i++) {
+        for(let j=i+1; j<newbl.length; j++) {
+            compVal = newbl[i].id;
+            compVal2 = newbl[i];
+            for (let k = 0; k < overlapArr.length; k++) {if(overlapArr[k].id == compVal) {isBreak = true;break;}}
+            if(isBreak) {isBreak = false;break;}
+            if(compVal == newbl[j].id) {overlap.key = compVal;overlap.val = ++cnt;}
+        }
+        if(Object.keys(overlap).length > 0){overlapArr.push(overlap.val);}
+        overlap = {};cnt = 1;
+    }
+    let newlength = Math.min.apply(null, overlapArr);
+    let newbl_data = [];
+    for (let i = 0; i < newbl.length - 1; i++) {
+        if (newbl[i + 1].id == newbl[i].id && newbl[i].organ) {
+            newbl_data.push(newbl[i]);
+            newbl_data.push(newbl[i+1]);
+        }
+    }
+
+    $(document).ready(function () {
+
+        $(function () {
+            $("#project_name").append("AIM20190901");
+            $("#subject_name").append("S01001");
+            $("#visit").append("Screening");
+            $("#time_point").append("BL");
+            $("#scan_date").append("2019-09-09");
+            $("#week").append("4");
+            $("#confirmatory_scan").append("4");
+            $("#response_date").append("2019-09-14");
+            $("#iresponse_date").append("2019-09-14");
+            $("#completed_name").append("김경원");
+
+            show_itemList();
+            show_baseList();
+        });
+    });
+
+    let itemList_Target = new Array();
+    let itemList_NonTarget = new Array();
+    let itemList_NewLesion = new Array();
+    let itemList_Overall = new Array();
+    let baseList_Target = new Array();
+    let baseList_NonTarget = new Array();
+    let baseList_NewLesion = new Array();
+    let baseList_Overall = new Array();
+
+    function show_itemList() {
+        // Target_itemList
+        for (let i = 0; i < bl.length; i++) {
+            let itemList_target_organ = '<div class="card-body small text-right border-bottom" name="target_' + i + '">TR' + (i+1) + '&nbsp;&nbsp;' + bl[i].organ + '&nbsp;/&nbsp;' + bl[i].site + '&nbsp;/&nbsp;' + bl[i].method + '</div>';
+            itemList_Target.push(itemList_target_organ);
+        }
+
+        let itemList_sum = '<div class="card-body small text-right">Sum Measurement</div>';
+        let itemList_bl = '<div class="card-body small text-right">BL</div>';
+        let itemList_nadir = '<div class="card-body small text-right">Nadir</div>';
+        let itemList_change_bl = '<div class="card-body small text-right">%Change_BL</div>';
+        let itemList_change_nadir = '<div class="card-body small text-right">%Change_Nadir</div>';
+        let itemList_target_Response = '<div class="card-body text-info small text-right">Response(RECIST 1.1)</div>';
+        let itemList_target_iResponse = '<div class="card-body text-info small text-right">Response(iRECIST 1.1)</div>';
+        itemList_Target.push(itemList_sum);
+        itemList_Target.push(itemList_bl);
+        itemList_Target.push(itemList_nadir);
+        itemList_Target.push(itemList_change_bl);
+        itemList_Target.push(itemList_change_nadir);
+        itemList_Target.push(itemList_target_Response);
+        itemList_Target.push(itemList_target_iResponse);
+
+        // NonTarget_itemList
+        for (let i = 0; i < nbl.length; i++) {
+            let itemList_NonTarget_organ = '<div class="card-body small text-right border-bottom" name="nontarget_' + i + '">NTR' + (i+1) + ' ' + nbl[i].organ + ' / ' + nbl[i].site + ' / ' + nbl[i].method + '</li>';
+            itemList_NonTarget.push(itemList_NonTarget_organ);
+        }
+
+        let itemList_NonTarget_Response = '<div class="card-body small text-info text-right">Response(RECIST 1.1)</li>';
+        let itemList_NonTarget_iResponse = '<div class="card-body small text-info text-right">Response(iRECIST 1.1)</li>';
+        itemList_NonTarget.push(itemList_NonTarget_Response);
+        itemList_NonTarget.push(itemList_NonTarget_iResponse);
+
+        // NewLesion_itemList
+        for (let i = 0; i < newlength; i++) {
+            let itemList_NewLesion_organ = '<div class="card-body small text-right border-bottom" name="new_' + i +'">NEW' + (i+1) + ' ' + newbl_data[i].organ + ' / ' + newbl_data[i].site + ' / ' + newbl_data[i].method + '</li>';
+            itemList_NewLesion.push(itemList_NewLesion_organ);
+        }
+        let itemList_NewLesion_Pre = '<div class="card-body small text-right">Previously Reported?</li>';
+        itemList_NewLesion.push(itemList_NewLesion_Pre);
+        let itemList_NewLesion_Sum = '<div class="card-body small text-right">Sum of Measurement</li>';
+        itemList_NewLesion.push(itemList_NewLesion_Sum);
+        let itemList_NewLesion_iSOM = '<div class="card-body small text-right">iSOM of NewLesion</li>';
+        itemList_NewLesion.push(itemList_NewLesion_iSOM);
+
+        // Overall_itemList
+        let itemList_Overall_Response = '<div class="card-body small text-info text-right">Response(RECIST1.1)</div>';
+        let itemList_Overall_iResponse = '<div class="card-body small text-info text-right">Response(iRECIST1.1)</div>';
+        let itemList_Overall_Complete_Date = '<div class="card-body small text-right">Date to Completion</div>';
+        itemList_Overall.push(itemList_Overall_Response);
+        itemList_Overall.push(itemList_Overall_iResponse);
+        itemList_Overall.push(itemList_Overall_Complete_Date);
+
+        // itemList_Add
+        for(let i = 0; i < itemList_Target.length; i++) {
+            $('div[name=item-list_target]').append(itemList_Target[i]);
+        }
+        for(let i = 0; i < itemList_NonTarget.length; i++) {
+            $('div[name=item-list_nontarget]').append(itemList_NonTarget[i]);
+        }
+        for(let i = 0; i < itemList_NewLesion.length; i++) {
+            $('div[name=item-list_newlesion]').append(itemList_NewLesion[i]);
+        }
+        for(let i = 0; i < itemList_Overall.length; i++) {
+            $('div[name=item-list_overall]').append(itemList_Overall[i]);
+        }
+    }
+
+    function show_baseList() {
+        let bl_tp = '<a class="btn btn-sm btn-outline-dark" href="#">' + tp_Data[0].time_point + ' </a>';
+        let bl_time = '<b class="zero">' + tp_Data[0].scan_date + '</b>';
+        $("div[name=bl_tp]").append(bl_tp);
+        $("div[name=bl_date]").append(bl_time);
+
+        // Target_baseList
+        for(let i = 0; i <bl.length; i++) {
+            let baseList_target_organ = '<div class="card-body small text-center border-bottom" name="target_' + i + '">' + bl[i].measurement + 'mm (S:' + bl[i].series + ',I:' + bl[i].image + ')</div>';
+            baseList_Target.push(baseList_target_organ);
+        }
+        let baseList_sum = '<div class="card-body small text-center">' + target_Data[0].sumofmeasurement +'</div>';
+        let baseList_bl = '<div class="card-body small text-center">BaseLine</div>';
+        let baseList_nadir = '<div class="card-body small text-center">BaseLine</div>';
+        let baseList_change_bl = '<div class="card-body small text-center">BaseLine</div>';
+        let baseList_change_nadir = '<div class="card-body small text-center">BaseLine</div>';
+        let baseList_target_Response = '<div class="card-body small text-center">BL</div>';
+        let baseList_target_iResponse = '<div class="card-body small text-center">BL</div>';
+        baseList_Target.push(baseList_sum);
+        baseList_Target.push(baseList_bl);
+        baseList_Target.push(baseList_nadir);
+        baseList_Target.push(baseList_change_bl);
+        baseList_Target.push(baseList_change_nadir);
+        baseList_Target.push(baseList_target_Response);
+        baseList_Target.push(baseList_target_iResponse);
+
+        // NonTarget_baseList
+        for(let i = 0; i < nbl.length; i++) {
+            let baseList_nonTarget_organ = '<div class="card-body small text-center border-bottom" name="nontarget_' + i +'">' + nbl[i].status + '(S:' + nbl[i].series + ',I:' + bl[i].image + ')</div>';
+            baseList_NonTarget.push(baseList_nonTarget_organ);
+        }
+        let baseList_NonTarget_Response = '<div class="card-body small text-center">BL</div>';
+        let baseList_NonTarget_iResponse = '<div class="card-body small text-center">BL</div>';
+        baseList_NonTarget.push(baseList_NonTarget_Response);
+        baseList_NonTarget.push(baseList_NonTarget_iResponse);
+
+        // NewLesion_baseList
+        for(let i = 0; i < newlength; i++) {
+            if(new_Data[i].type == "") {
+                let baseList_NewLesion_organ = '<div class="card-body small text-center border-bottom" name="new_' + i +'">None</div>';
+                baseList_NewLesion.push(baseList_NewLesion_organ);
+            } else if(new_Data[i].type == "target") {
+                let baseList_NewLesion_organ = '<div class="card-body small text-center border-bottom" name="new_' + i +'">' + new_Data[i].assessment + 'mm (S:' + new_Data[i].series + ',I:' + new_Data[i].image + ')' + '</div>';
+                baseList_NewLesion.push(baseList_NewLesion_organ);
+            } else if(new_Data[i].type == "nontarget") {
+                let baseList_NewLesion_organ = '<div class="card-body small text-center border-bottom" name="new_' + i +'">' + new_Data[i].assessment + '(S:' + new_Data[i].series + ',I:' + new_Data[i].image + ')' + '</div>';
+                baseList_NewLesion.push(baseList_NewLesion_organ);
+            }
+        }
+        if (new_Data[0].previously == "") {
+            let baseList_NewLesion_Pre = '<div class="card-body small text-center">None</div>';
+            baseList_NewLesion.push(baseList_NewLesion_Pre);
+        }
+        else {
+            let baseList_NewLesion_Pre = '<div class="card-body small text-center">' + new_Data[0].previously + '</div>';
+            baseList_NewLesion.push(baseList_NewLesion_Pre);
+        }
+
+        if (new_Data[0].sumofmeasurement == "") {
+            let baseList_NewLesion_Sum = '<div class="card-body small text-center">None</div>';
+            baseList_NewLesion.push(baseList_NewLesion_Sum);
+        }
+        else {
+            let baseList_NewLesion_Pre = '<div class="card-body small text-center">' + new_Data[0].previously + '</div>';
+            baseList_NewLesion.push(baseList_NewLesion_Pre);
+        }
+        let baseList_NewLesion_iSOM = '<div class="card-body small text-center">None</div>';
+        baseList_NewLesion.push(baseList_NewLesion_iSOM);
+
+        // Overall_baseList
+        let baseList_Overall_Response = '<div class="card-body small text-center card-border">' + overall_Data[0].response + '</div>';
+        let baseList_Overall_iResponse = '<div class="card-body small text-center card-border">' + overall_Data[0].iresponse + '</div>';
+        let baseList_Overall_CompleteDay = '<div class="card-body small text-center">' + overall_Data[0].completed_day + '</div>';
+        baseList_Overall.push(baseList_Overall_Response);
+        baseList_Overall.push(baseList_Overall_iResponse);
+        baseList_Overall.push(baseList_Overall_CompleteDay);
+
+        // Add baseList
+        for(let i = 0; i <baseList_Target.length; i++) {
+            $("div[name=base-list_target]").append(baseList_Target[i]);
+        }
+        for(let i = 0; i <baseList_NonTarget.length; i++) {
+            $("div[name=base-list_nontarget]").append(baseList_NonTarget[i]);
+        }
+        for(let i = 0; i <baseList_NewLesion.length; i++) {
+            $("div[name=base-list_newlesion]").append(baseList_NewLesion[i]);
+        }
+        for(let i = 0; i <baseList_Overall.length; i++) {
+            $("div[name=base-list_overall]").append(baseList_Overall[i]);
+        }
+        show_timeList();
+    }
+
+    function show_timeList() {
+        for(let i = 1; i < tp_Data.length; i++) {
+            let timePoint_border = '';
+            if(overall_Data[i].response == "CR" || overall_Data[i].iresponse == "iCR") {
+                timePoint_border = '<div class = "card-body border-0 text-center"><a class="btn btn-sm btn-outline-primary" href="#">' + tp_Data[i].time_point + '</a></div>';
+            } else if (overall_Data[i].response == "PR" || overall_Data[i].iresponse == "iPR") {
+                timePoint_border = '<div class = "card-body border-0 text-center"><a class="btn btn-sm btn-outline-info" href="#">' + tp_Data[i].time_point + '</a></div>';
+            } else if (overall_Data[i].response == "SD" || overall_Data[i].iresponse == "iSD") {
+                timePoint_border = '<div class = "card-body border-0 text-center"><a class="btn btn-sm btn-outline-success" href="#">' + tp_Data[i].time_point + '</a></div>';
+            } else if (overall_Data[i].response == "PD" || overall_Data[i].iresponse == "iPD") {
+                timePoint_border = '<div class = "card-body border-0 text-center"><a class="btn btn-sm btn-outline-warning" href="#">' + tp_Data[i].time_point + '</a></div>';
+            } else {
+                timePoint_border = '<div class = "card-body border-0 text-center"><a class="btn btn-sm btn-outline-dark" href="#">' + tp_Data[i].time_point + '</a></div>';
+            }
+            let tp_output_timePoint = '<div class=" card-list rotate mr-2" style="width: 13rem">' +
+                timePoint_border +
+                '<div class = "card-body border-0 text-center"><b class="zero">' + tp_Data[i].scan_date + '</b></div>' +
+                '<div class = "card card-border zero" name="data-list_target_' + i +'"> </div>' +
+                '<div class = "card card-border mt-2 zero" name="data-list_nontarget_' + i +'"> </div>' +
+                '<div class = "card card-border mt-2 zero" name="data-list_newlesion_' + i +'"> </div>' +
+                '<div class = "card card-border mt-2 zero" name="data-list_overall_' + i +'"> </div></div>';
+            $("div[name=tp-group]").append(tp_output_timePoint);
+        }
+        for(let i = 0; i < tp_Data.length; i++) {
+            let extra_Card = '<div class = "card-body border-0 text-center">' + '' +'</div>';
+            $("div[name=tp-group]").append(extra_Card);
+        }
+
+
+        show_TargetData()
+    }
+
+
+     function show_TargetData() {
+         SumOfMeasurement.push(target_Data[0].sumofmeasurement);
+         for(let i = 1; i <tp_Data.length; i++) {
+             for(let j = 0; j < bl.length; j++) {
+                 let data_output = '<div class="card-body small text-center border-bottom" name="target_' + j + '">' + target_Data[(i*bl.length)+j].measurement + 'mm (S:' + target_Data[(i*bl.length)+j].series + ',I:' + target_Data[(i*bl.length)+j].image + ')</div>';
+                 $("div[name=data-list_target_" + i + "]").append(data_output);
+             }
+             let sum_data_output = '<div class="card-body small text-center">' + target_Data[(i*bl.length)].sumofmeasurement + '</div>';
+             $("div[name=data-list_target_" + i + "]").append(sum_data_output);
+             SumOfMeasurement.push(target_Data[(i*bl.length)].sumofmeasurement);
+             let basedir = target_Data[0].sumofmeasurement;
+             let basedir_output = '<div class="card-body small text-center">' + basedir + '</div>';
+             $("div[name=data-list_target_" + i + "]").append(basedir_output);
+             let current_nadir = Math.min.apply(null, SumOfMeasurement);
+             let nadir_output = '<div class="card-body small text-center">' + current_nadir + '</div>';
+             $("div[name=data-list_target_" + i + "]").append(nadir_output);
+             let change_basedir = ((parseFloat(SumOfMeasurement[i]) - parseFloat(basedir)) / parseFloat(basedir) * 100).toFixed(2) + "%";
+             let change_nadir = ((parseFloat(SumOfMeasurement[i]) - current_nadir) / current_nadir * 100).toFixed(2) + "%";
+             if(parseFloat(change_basedir) > 0) {
+                 let change_basedir_output = '<div class="card-body small text-center text-danger">' + change_basedir + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(change_basedir_output);
+             } else if(parseFloat(change_basedir) < 0) {
+                 let change_basedir_output = '<div class="card-body small text-center text-primary">' + change_basedir + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(change_basedir_output);
+             } else {
+                 let change_basedir_output = '<div class="card-body small text-center">' + change_basedir + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(change_basedir_output);
+             }
+             if(parseFloat(change_nadir) > 0) {
+                 let change_nadir_output = '<div class="card-body small text-center text-danger">' + change_nadir + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(change_nadir_output);
+             } else if(parseFloat(change_nadir) < 0) {
+                 let change_nadir_output = '<div class="card-body small text-center text-primary">' + change_nadir + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(change_nadir_output);
+             } else {
+                 let change_nadir_output = '<div class="card-body small text-center">' + change_nadir + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(change_nadir_output);
+             }
+         }
+         show_response();
+     }
+
+     function show_response() {
+         for(let i = 0 ; i <tp_Data.length; i++) {
+             if(target_Data[i * bl.length].response == "CR") {
+                 let response_data_output = '<div class="card-body small text-center text-primary">' + target_Data[i * bl.length].response + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             } else if(target_Data[i * bl.length].response  == "PR") {
+                 let response_data_output = '<div class="card-body small text-center text-info">' + target_Data[i * bl.length].response + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             } else if(target_Data[i * bl.length].response  == "SD") {
+                 let response_data_output = '<div class="card-body small text-center text-warning">' + target_Data[i * bl.length].response + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             } else if(target_Data[i * bl.length].response  == "PD") {
+                 let response_data_output = '<div class="card-body small text-center text-success">' + target_Data[i * bl.length].response + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             } else {
+                 let response_data_output = '<div class="card-body small text-center">' + target_Data[i * bl.length].response + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             }
+         }
+
+         for(let i = 0 ; i <tp_Data.length; i++) {
+             if(target_Data[i * bl.length].iresponse == "iCR") {
+                 let response_data_output = '<div class="card-body small text-center text-primary">' + target_Data[i * bl.length].iresponse + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             } else if(target_Data[i * bl.length].iresponse  == "iPR") {
+                 let response_data_output = '<div class="card-body small text-center text-info">' + target_Data[i * bl.length].iresponse + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             } else if(target_Data[i * bl.length].iresponse  == "iSD") {
+                 let response_data_output = '<div class="card-body small text-center text-warning">' + target_Data[i * bl.length].iresponse + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             } else if(target_Data[i * bl.length].iresponse  == "iUPD") {
+                 let response_data_output = '<div class="card-body small text-center text-danger">' + target_Data[i * bl.length].iresponse + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             } else if(target_Data[i * bl.length].iresponse  == "iCPD") {
+                 let response_data_output = '<div class="card-body small text-center text-success">' + target_Data[i * bl.length].iresponse + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             } else {
+                 let response_data_output = '<div class="card-body small text-center">' + target_Data[i * bl.length].iresponse + '</div>';
+                 $("div[name=data-list_target_" + i + "]").append(response_data_output);
+             }
+         }
+         show_NonTargetData();
+     }
+
+
+    function show_NonTargetData() {
+        for (let i = 1; i < tp_Data.length; i++) {
+            for(let j = 0; j < nbl.length; j++) {
+                let ntp_output = '<div class="card-body small text-center border-bottom" name="nontarget_' + j +'">' + ntarget_Data[i*nbl.length + j].status + '(S:' + ntarget_Data[i*nbl.length + j].series + ',I:' + ntarget_Data[i*nbl.length + j].image + ')' + '</div>';
+                $("div[name=data-list_nontarget_" + i + "]").append(ntp_output);
+            }
+        }
+        show_NonResponse();
+    }
+
+    function show_NonResponse() {
+        for(let i = 0 ; i <tp_Data.length; i++) {
+            if(ntarget_Data[i * nbl.length].response == "CR") {
+                let response_data_output = '<div class="card-body small text-center text-primary">' + ntarget_Data[i * nbl.length].response + '</div>';
+                $("div[name=data-list_nontarget_" + i + "]").append(response_data_output);
+            } else if(ntarget_Data[i * nbl.length].response  == "Non-CR/Non-PR") {
+                let response_data_output = '<div class="card-body small text-center text-info">' + ntarget_Data[i * nbl.length].response + '</div>';
+                $("div[name=data-list_nontarget_" + i + "]").append(response_data_output);
+            } else if(ntarget_Data[i * nbl.length].response  == "PD") {
+                let response_data_output = '<div class="card-body small text-center text-danger">' + ntarget_Data[i * nbl.length].response + '</div>';
+                $("div[name=data-list_nontarget_" + i + "]").append(response_data_output);
+            } else {
+                let response_data_output = '<div class="card-body small text-center small">' + ntarget_Data[i * nbl.length].response + '</div>';
+                $("div[name=data-list_nontarget_" + i + "]").append(response_data_output);
+            }
+        }
+
+        for(let i = 0 ; i <tp_Data.length; i++) {
+            if(ntarget_Data[i * nbl.length].iresponse == "iCR") {
+                let response_data_output = '<div class="card-body small text-center text-primary">' + ntarget_Data[i * nbl.length].iresponse + '</div>';
+                $("div[name=data-list_nontarget_" + i + "]").append(response_data_output);
+            } else if(ntarget_Data[i * nbl.length].iresponse  == "Non-iCR/Non-iPR") {
+                let response_data_output = '<div class="card-body small text-center text-info">' + ntarget_Data[i * nbl.length].iresponse + '</div>';
+                $("div[name=data-list_nontarget_" + i + "]").append(response_data_output);
+            } else if(ntarget_Data[i * nbl.length].iresponse  == "iUPD") {
+                let response_data_output = '<div class="card-body small text-center text-warning">' + ntarget_Data[i * nbl.length].iresponse + '</div>';
+                $("div[name=data-list_nontarget_" + i + "]").append(response_data_output);
+            } else if(ntarget_Data[i * nbl.length].iresponse  == "iUCD") {
+                let response_data_output = '<div class="card-body small text-center text-danger">' + ntarget_Data[i * nbl.length].iresponse + '</div>';
+                $("div[name=data-list_nontarget_" + i + "]").append(response_data_output);
+            }  else {
+                let response_data_output = '<div class="card-body small text-center">' + ntarget_Data[i * nbl.length].iresponse + '</div>';
+                $("div[name=data-list_nontarget_" + i + "]").append(response_data_output);
+            }
+        }
+        show_NewData();
+    }
+
+    function show_NewData() {
+        for (let i = 1; i < tp_Data.length; i++) {
+            for(let j = 0; j < newlength; j ++) {
+                if (new_Data[i * newlength + j].type == "") {
+                    let newLesion_output = '<div class="card-body small text-center border-bottom" name="new_' + j + '">None</div>';
+                    $("div[name=data-list_newlesion_" + i + "]").append(newLesion_output);
+                } else if (new_Data[i * newlength + j].type == "target") {
+                    let newLesion_output = '<div class="card-body small text-center border-bottom" name="new_' + j + '">' + new_Data[i * newlength + j].assessment + 'mm (S:' + new_Data[i * newlength + j].series + ',I:' + new_Data[i * newlength + j].image + ')' + '</div>';
+                    $("div[name=data-list_newlesion_" + i + "]").append(newLesion_output);
+                } else if (new_Data[i * newlength + j].type == "nontarget") {
+                    let newLesion_output = '<div class="card-body small text-center border-bottom" name="new_' + j + '">' + new_Data[i * newlength + j].assessment + '(S:' + new_Data[i * newlength + j].series + ',I:' + new_Data[i * newlength + j].image + ')' + '</div>';
+                    $("div[name=data-list_newlesion_" + i + "]").append(newLesion_output);
+                }
+            }
+        }
+        show_newPreReport();
+    }
+
+    function show_newPreReport() {
+        let newLesion_isom = [];
+        for (let i = 1; i < tp_Data.length; i++) {
+            if (new_Data[i * newlength].previously == "") {
+                let newLesion_output = '<div class="card-body small text-center">' + 'None' + '</div>';
+                $("div[name=data-list_newlesion_" + i + "]").append(newLesion_output);
+            }
+            else {
+                let newLesion_output = '<div class="card-body small text-center">' + new_Data[i * newlength].previously + '</div>';
+                $("div[name=data-list_newlesion_" + i + "]").append(newLesion_output);
+            }
+            let newLesion_output_sum = [];
+            for(let j = 0; j < newlength; j ++) {
+                if (new_Data[i * newlength + j].sumofmeasurement == "") {
+                } else {
+                    newLesion_output_sum.push('<div class="card-body small text-center">' + new_Data[i * newlength + j].sumofmeasurement + '</div>');
+                    newLesion_isom.push(new_Data[i * newlength + j].sumofmeasurement);
+
+                }
+            }
+            if(newLesion_output_sum.length > 0) {
+                let newLesion_output = newLesion_output_sum[0];
+
+
+                $("div[name=data-list_newlesion_" + i + "]").append(newLesion_output);
+            } else {
+                let newLesion_output = '<div class="card-body small text-center">None</div>';
+                $("div[name=data-list_newlesion_" + i + "]").append(newLesion_output);
+            }
+
+            if(newLesion_isom.length > 0) {
+                console.log(parseFloat(newLesion_isom[newLesion_isom.length-1]) - parseFloat(newLesion_isom[newLesion_isom.length-2]))
+                if(newLesion_isom.length == 1) {
+                    let newLesion_output = '<div class="card-body small text-center">' + 0 + '</div>';
+                    $("div[name=data-list_newlesion_" + i + "]").append(newLesion_output);
+                } else if(newLesion_isom.length > 1) {
+                    let newLesion_output = '<div class="card-body small text-center">' + (parseFloat(newLesion_isom[newLesion_isom.length-1]) - parseFloat(newLesion_isom[newLesion_isom.length-2])) + '</div>';
+                    $("div[name=data-list_newlesion_" + i + "]").append(newLesion_output);
+                }
+            } else {
+                let newLesion_output = '<div class="card-body small text-center">None</div>';
+                $("div[name=data-list_newlesion_" + i + "]").append(newLesion_output);
+            }
+        }
+        show_overall();
+    }
+    
+    function show_overall() {
+        for(let  i = 1; i < tp_Data.length; i++) {
+            if (overall_Data[i].response == "CR") {
+                let overall_output = '<div class="card-body small text-center bg-primary text-white  border-primary card-border">' + overall_Data[i].response + '</div>';
+                $("div[name=data-list_overall_" + i + "]").append(overall_output);
+            } else if (overall_Data[i].response == "PR") {
+                let overall_output = '<div class="card-body small text-center bg-info text-white border-info card-border">' + overall_Data[i].response + '</div>';
+                $("div[name=data-list_overall_" + i + "]").append(overall_output);
+            } else if (overall_Data[i].response == "SD") {
+                let overall_output = '<div class="card-body small text-center bg-success text-white border-success card-border">' + overall_Data[i].response + '</div>';
+                $("div[name=data-list_overall_" + i + "]").append(overall_output);
+            } else if (overall_Data[i].response == "PD") {
+                let overall_output = '<div class="card-body small text-center bg-warning text-white border-warning card-border">' + overall_Data[i].response + '</divi>';
+                $("div[name=data-list_overall_" + i + "]").append(overall_output);
+            } else {
+                let overall_output = '<div class="card-body small text-white bg-secondary text-center card-border">' + overall_Data[i].response + '</div>';
+                $("div[name=data-list_overall_" + i + "]").append(overall_output);
+            }
+        }
+
+        for(let  i = 1; i < tp_Data.length; i++) {
+            if(overall_Data[i].iresponse == "iCR") {
+                let response_data_output = '<div class="card-body small text-center bg-primary text-white border-primary card-border">' + overall_Data[i].iresponse + '</div>';
+                $("div[name=data-list_overall_" + i + "]").append(response_data_output);
+            } else if(overall_Data[i].iresponse  == "iPR") {
+                let response_data_output = '<div class="card-body small text-center bg-info text-white border-info card-border">' + overall_Data[i].iresponse + '</div>';
+                $("div[name=data-list_overall_" + i + "]").append(response_data_output);
+            } else if(overall_Data[i].iresponse  == "iSD") {
+                let response_data_output = '<div class="card-body small text-center bg-success text-white border-success card-border">' + overall_Data[i].iresponse + '</div>';
+                $("div[name=data-list_overall_" + i + "]").append(response_data_output);
+            } else if(overall_Data[i].iresponse  == "iUPD") {
+                let response_data_output = '<div class="card-body small text-center bg-warning text-white border-warning card-border">' + overall_Data[i].iresponse + '</div>';
+                $("div[name=data-list_overall_" + i + "]").append(response_data_output);
+            } else if(overall_Data[i].iresponse  == "iUCD") {
+                let response_data_output = '<div class="card-body small text-center bg-danger text-white border-danger card-border">' + overall_Data[i].iresponse + '</div>';
+                $("div[name=data-list_overall_" + i + "]").append(response_data_output);
+            }  else {
+                let response_data_output = '<div class="card-body small text-center text-white bg-secondary card-border">' + overall_Data[i].iresponse + '</div>';
+                $("div[name=data-list_overall_" + i + "]").append(response_data_output);
+            }
+        }
+        for(let i = 1; i <tp_Data.length; i++) {
+            let overall_output = '<div class="card-body small text-center">' + overall_Data[i].completed_day + '</div>';
+            $("div[name=data-list_overall_" + i + "]").append(overall_output);
+        }
+        //textvalidation();
+    }
+
+    function textvalidation() {
+        for(let i = 0; i < nbl.length; i ++) {
+            for(let j = 0; j < document.getElementsByName('nontarget_'+ i +'').length; j++) {
+                if(document.getElementsByName('nontarget_'+ i +'')[j].textContent.length > 23) {
+                    for(let k = 0; k < document.getElementsByName('nontarget_'+ i +'').length; k++) {
+                        if(k == 0) {
+                            document.getElementsByName('nontarget_'+ i +'')[k].innerText = document.getElementsByName('nontarget_'+ i +'')[k].textContent.replace("/", "\n")
+                        } else {
+                            document.getElementsByName('nontarget_'+ i +'')[k].innerText = document.getElementsByName('nontarget_'+ i +'')[k].textContent.replace("(", "\n(")
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+
+        console.log(document.getElementsByName('new_'+ 0 +'')[1].textContent[4])
+        for(let i = 0; i < newlength; i ++) {
+            for(let j = 0; j < document.getElementsByName('new_'+ i +'').length; j++) {
+                if(document.getElementsByName('new_'+ i +'')[j].textContent.length > 23) {
+                    for(let k = 0; k < document.getElementsByName('new_'+ i +'').length; k++) {
+                        if(k == 0) {
+                            document.getElementsByName('new_'+ i +'')[k].innerText = document.getElementsByName('new_'+ i +'')[k].textContent.replace("/", "\n")
+                        } else {
+                            if(document.getElementsByName('new_'+ i +'')[k].textContent === "None"){
+                                document.getElementsByName('new_'+ i +'')[k].innerHTML = "None\n" + "&nbsp";
+                            }
+                            document.getElementsByName('new_'+ i +'')[k].innerText = document.getElementsByName('new_'+ i +'')[k].textContent.replace("(", "\n(")
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+    }
+</script>
+</html>

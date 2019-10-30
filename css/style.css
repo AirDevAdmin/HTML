@@ -1,0 +1,36 @@
+label.error{
+    display: block;
+    color: var( --red );
+    position: relative;
+    font-weight: bold;
+}
+
+.card-login-after{
+    max-width: 45rem;
+}
+
+.logout {
+    padding: 1px 10px;
+    background: var(--red);
+    color: #fff;
+    font-size: 12px;
+    float: right;
+    cursor: pointer;
+}
+.dt-buttons{
+    text-align: right;
+    margin-bottom: 20px;
+}
+.dt-button{
+    padding: 3px 15px;
+    background: var(--green);
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border: 0px;
+}
+
+.dataTables_length{
+    float: left;
+}
+
