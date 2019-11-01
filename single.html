@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DTF</title>
+    <title>PACS</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,7 +27,7 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="single.html">DTF</a>
+    <a class="navbar-brand mr-1" href="single.html">RECIST</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -37,23 +37,6 @@
 </nav>
 
 <div id="wrapper">
-    <div class="container">
-        <div class="row my-4">
-            <div class="col">
-                    <h2>Image Uploader</h2>
-                    <p>폴더 업로드</p>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" webkitdirectory directory multiple>
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
-                    <form action="/file-upload" class="dropzone dz-clickable" id="my-dropzone">
-                        <div class="dz-message d-flex flex-column">
-                            <b class="m-5">Drag & Drop Files Here</b>
-                        </div>
-                    </form>
-                </div>
-        </div>
-    </div>
 
     <!--
     <ul class="sidebar navbar-nav">
@@ -66,7 +49,338 @@
 
     </ul>Sidebar -->
 
+    <div id="content-wrapper">
+        <div class="container-fluid">
 
+            <!-- Breadcrumbs-->
+            <!--  <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                      <a href="#">Exam</a>
+                  </li>
+                  <li class="breadcrumb-item active">Search</li>
+              </ol>*/-->
+            <div class="card-group"  style="font-size: 0.8rem">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i id="project_name" class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="card-group">
+                        <div class="card">
+                            <div class="card-body d-flex mb-0">
+                                <b class="card-title">Subject Name</b>
+                                <p id="subject_name" class="card-text ml-3"></p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body d-flex mb-0">
+                                <b class="card-title">Scan Date</b>
+                                <p id="scan_date" class="card-text ml-3"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-business-time"> Assessment Period</i>
+                    </div>
+                    <div class="card-group">
+                        <div class="card">
+                            <div class="card-body d-flex mb-0">
+                                <b class="card-title">Time Point</b>
+                                <p id="time_point" class="card-text ml-3"></p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body d-flex mb-0">
+                                <b class="card-title">Visit</b>
+                                <p id="visit" class="card-text ml-3"></p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body d-flex mb-0">
+                                <b class="card-title">Week</b>
+                                <p id="week" class="card-text ml-3"></p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body d-flex mb-0">
+                                <b class="card-title">Confirmatory Scan</b>
+                                <p id="confirmatory_scan" class="card-text ml-3"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Target  -->
+            <div class="card mb-3"  style="font-size: 0.8rem">
+                <div class="card-header">
+                    <i class="fas fa-crutch"> Target Lesion</i>
+                </div>
+                <div class="card-body m-1">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="targetTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Organ</th>
+                                <th>Site</th>
+                                <th>Series #</th>
+                                <th>Image #x</th>
+                                <th>Method</th>
+                                <th>Method(Other)</th>
+                                <th>Measurement(mm)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
+                        <div class="card-group">
+                            <div class="card mb-1">
+                                <div class="card-header">
+                                    <i class="fas fa-book-medical"> Response</i>
+                                </div>
+                                <div class="card-group">
+                                    <div class="card">
+                                        <div class="card-body d-flex mb-0 pb-0">
+                                            <b class="card-text">sum of measurement</b>
+                                            <p id="sum_of_measurement" class="ml-3"></p>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body d-flex mb-0 pb-0">
+                                            <b class="card-text mt-1">Response of target Lesion (RECIST 1.1)</b>
+                                            <select id="response_of_target_lesion_recist" class="custom-select smaller w-25 ml-3 h-75"></select>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body d-flex mb-0 pb-0">
+                                            <b class="card-text mt-1">Response of target Lesion (iRECIST)</b>
+                                            <select id="response_of_target_lesion_irecist" class="custom-select smaller w-25 ml-3 h-75"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-group">
+                            <div class="card mb-1">
+                                <div class="card-header">
+                                    <i class="fas fa-flag-checkered"> Baseline</i>
+                                </div>
+                                <div class="card-group">
+                                    <div class="card">
+                                        <div class="card-body d-flex mb-0 pb-0">
+                                            <b class="card-title">Baseline SUM</b>
+                                            <p id=33"" class="card-text ml-3">5454</p>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body d-flex mb-0 pb-0">
+                                            <b class="card-title">Increase/Decrase</b>
+                                            <p id="44" class="card-text ml-3">-44.10</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-1">
+                                <div class="card-header">
+                                    <i class="fas fa-compress-arrows-alt"> Nadir 2019-09-09</i>
+                                </div>
+                                <div class="card-group">
+                                    <div class="card">
+                                        <div class="card-body d-flex mb-0 pb-0">
+                                            <b class="card-title">Nadir Sum</b>
+                                            <p id="66" class="card-text ml-3"></p>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body d-flex mb-0 pb-0">
+                                            <b class="card-title">Increase/Decrase </b>
+                                            <p id="77" class="card-text ml-3"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Non-target  -->
+            <div class="card mb-3" style="font-size: 0.8rem">
+                <div class="card-header">
+                    <i class="fas fa-vials"> Non-Target Lesion</i>
+                </div>
+                <div class="card-body m-1">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="nontargetTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Organ</th>
+                                <th>Site</th>
+                                <th>Series #</th>
+                                <th>Image #x</th>
+                                <th>Method</th>
+                                <th>Method(Other)</th>
+                                <th>Lesion status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
+                        <div class="card-group">
+                            <div class="card mb-1">
+                                <div class="card-header">
+                                    <i class="fas fa-book-medical"> REICST/iRECIST</i>
+                                </div>
+                                <div class="card-group">
+                                    <div class="card">
+                                        <div class="card-body d-flex pb-0">
+                                            <b class="card-text mt-1">Response of Non-Target Lesion (RECIST 1.1)</b>
+                                            <select id="response_of_nontarget_lesion_recist" class="custom-select smaller w-25 ml-3 h-75"></select>
+
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body d-flex pb-0">
+                                            <b class="card-text mt-1">Response of Non-Target Lesion (iRECIST)</b>
+                                            <select id="response_of_nontarget_lesion_irecist" class="custom-select smaller w-25 ml-3 h-75"></select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- Non-target  -->
+            <div class="card mb-3" style="font-size: 0.8rem">
+                <div class="card-header">
+                    <i class="fas fa-vials"> new Lesion</i>
+                </div>
+                <div class="card-body m-1">
+                    <div class="table-responsive">
+                            <table class="table table-bordered" id="newlesionTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Organ</th>
+                                    <th>Site</th>
+                                    <th>Series #</th>
+                                    <th>Image #</th>
+                                    <th>Method</th>
+                                    <th>Method(Other)</th>
+                                    <th>Lesion Type</th>
+                                    <th>assessment</th>
+                                    <th>Previously Reported?</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                    </div>
+
+                    <div class="card-group">
+                        <div class="card mb-1">
+                            <div class="card-header">
+                                <i class="fas fa-book-medical">  Result</i>
+                            </div>
+                            <div class="card-group">
+                                <div class="card ">
+                                    <div class="card-body d-flex mb-0 pb-0">
+                                        <b class="card-text mr-3">sum of measurement</b>
+                                        <p id="newlesion_sum_of_mewsurements">123</p>
+                                    </div>
+                                </div>
+                                <div class="card ">
+                                    <div class="card-body d-flex mb-0 pb-0">
+                                        <b class="card-text mr-3">Change of iSOM of New lesion from previous assessment</b>
+                                        <p id="change_of_isom_of_new_lesion_from_previous_assessment">123</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3" style="font-size: 0.8rem">
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <i class="fas fa-book-medical"> Overall Response</i>
+                        </div>
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="card-body">
+                                    <b class="card-text">Response of Overall (RECIST 1.1)</b>
+                                    <select id="response_of_overall_recist" class="custom-select smaller"></select>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <b class="card-text">Response of Date</b>
+                                    <input type="text" class="form-control smaller datepicker" placeholder="   select date"> </input>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <b class="card-text">iResponse of Overall (iRECIST)</b>
+                                    <select id="response_of_overall_irecist" class="custom-select smaller"   ></select>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <b class="card-text">iResponse of Date</b>
+                                    <input type="text" class="form-control smaller datepicker" placeholder="   select date"> </input>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <b class="card-text">Form completed by</b>
+                                    <input type="text" class="form-control smaller"> </input>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <b class="card-text">Date fo completion</b>
+                                    <input type="text" class="form-control smaller datepicker" placeholder="   select date"> </input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="card m-2">
+                    <div class="card-header">
+                        <i class="fas fa-book-medical"> Comment</i>
+                    </div>
+                    <textarea class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer w-100">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © PACS 2019</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
@@ -77,9 +391,6 @@
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Dropzone.js-->
-<script src="js/dropzone.js"></script>
 
 <!-- Core plugin JavaScript-->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -332,12 +643,12 @@
         var index = $.inArray(selectedSubId, rows_selected);
 
         // If checkbox is checked and row ID is not in list of selected row IDs
-        if (this.checked && index === -1) {
+        if (this.checked && single === -1) {
             rows_selected.push(selectedSubId);
 
             // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
-        } else if (!this.checked && index !== -1) {
-            rows_selected.splice(index, 1);
+        } else if (!this.checked && single !== -1) {
+            rows_selected.splice(single, 1);
         }
 
         if (this.checked) {
@@ -521,7 +832,9 @@
                     'name="' + itemid + '" class="form-control smaller" placeholder="input"  value="' + value + '"  >';
             }
         }
-        
+
+
+
         if (name !== 'measurement') {
 
             ouput += '<small id="' + itemid + '_alter" class="text-danger" style="display:none">please input value</smail>';
@@ -1133,7 +1446,7 @@
     };
     datepicker.datepicker(options);
 </script>
-</div>
+
 </body>
 
 </html>
